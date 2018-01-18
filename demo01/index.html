@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/react.js"></script><!--是react的核心库-->
+    <script src="../build/react-dom.js"></script><!--//提供与dom相关的功能-->
+    <script src="../build/browser.min.js"></script><!--//将jsx语法转为javascript语法-->
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        ReactDOM.render(
+              <h1>Hello,world!</h1>,
+                document.getElementById("example")
+        );
+    </script>
+</body>
+</html>

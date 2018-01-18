@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <script src="../build/jquery.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        var UserGist = React.createClass({
+            getInitialState: function(){
+                return{
+                    username: '',
+                    lastGistUrl: ''
+                };
+            },
+
+            /*componentDidMount: function(){
+                $.get(this.props.source,function(result){
+                    var lastGist = result[0];
+                    if(this.isMounted()){
+                        this.setState({
+                            username: lastGist.owner.login,
+                            lastGistUrl: lastGist.html_url
+                        });
+                    }
+                }.bind(this));
+            },*/
+
+            componentDidMount: function(){
+                $.ajax({/*跨域访问豆瓣的接口，获取数据*/
+                    async: true,
+                    url: this.props.source,
+                    type: "GET",
+                    dataType: "jsonp",
+                    jsonp: 'callback',
+                    jsonCallback: 'handleResponse',
+                    data: {
+                        q: 'javascript',
+                        count : 1
+                    },
+                    success: function(result){
+                        console.log(result);
+                        /*this.setState({
+                            username: lastGist.owner.login,
+                            lastGistUrl: lastGist.html_url
+                        });*/
+                    }
+                });
+            },
+
+            render: function(){
+                return (
+                        <div>
+                            {this.state.username}'s last gist is
+                            <a href={this.state.lastGistUrl}>here</a>.
+                        </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+                <UserGist source="https://api.douban.com/v2/book/search" />,
+                document.getElementById('example')
+        );
+    </script>
+</body>
+</html>

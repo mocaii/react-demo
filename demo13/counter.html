@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/jquery.min.js"></script>
+</head>
+<!--这个不是react例子-->
+<body>
+ <input type="text" id="num">
+<script>
+    $(function(){
+        $("#num").blur(function(){
+            lx();
+        });
+        function lx(){
+            var l = parseFloat($("#num").val());
+            $("#num").val(l/100+"%");
+        }
+    })
+</script>
+</body>
+</html>
